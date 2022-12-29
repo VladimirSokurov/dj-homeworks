@@ -1,4 +1,4 @@
-from django_filters import rest_framework as filters1
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import filters
 
@@ -16,6 +16,6 @@ class ProductViewSet(ModelViewSet):
 class StockViewSet(ModelViewSet):
     serializer_class = StockSerializer
     queryset = Stock.objects.all()
-    filter_backends = [filters.SearchFilter, filters1.DjangoFilterBackend]
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
     filterset_fields = ['products']
     search_fields = ['products__title']
