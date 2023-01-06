@@ -1,7 +1,7 @@
 # примеры API-запросов
 
-@baseUrl = https://localhost:8000/api
-
+#@baseUrl = http://127.0.0.1:8000/api
+#
 # получение объявлений
 GET {{baseUrl}}/advertisements/
 Content-Type: application/json
