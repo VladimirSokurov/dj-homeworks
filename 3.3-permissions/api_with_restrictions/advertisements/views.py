@@ -10,6 +10,7 @@ from .permissions import AccessPermission
 
 class AdvertisementViewSet(ModelViewSet):
     """ViewSet для объявлений."""
+    # queryset = Advertisement.objects.all()
     queryset = Advertisement.objects.all()
     serializer_class = AdvertisementSerializer
     filter_backends = [DjangoFilterBackend]
@@ -24,3 +25,9 @@ class AdvertisementViewSet(ModelViewSet):
         else:
             permissions = []
         return [permission() for permission in permissions]
+
+    def destroy(self, request, *args, **kwargs):
+        user = request.user
+        posts = Advertisement.objects.filter(creator=user, status='OPEN').count()
+        if posts >= 10:
+            return super(AdvertisementViewSet, self).destroy(request, *args, **kwargs)
